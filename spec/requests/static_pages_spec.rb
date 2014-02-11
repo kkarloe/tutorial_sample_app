@@ -6,6 +6,11 @@ describe "Static pages" do
   
   subject { page }
   
+  shared_examples_for "all static pages" do
+    it { should have_selector("h1", text: heading)}
+    it { should have_title(full_title(page_title)) }  
+  end
+  
   describe "Home page" do
     before { visit root_path }
     
@@ -31,8 +36,20 @@ describe "Static pages" do
   describe "Contact page" do
     before { visit contact_path }
     
-    it { should have_content('Contact') }  
-    it { should have_title(full_title("Contact")) }
+    let(:heading) { 'Contact' }
+    let(:page_title) { 'Contact' }
+    it_should_behave_like "all static pages"
+  end
+  
+  describe "Static pages" do
+    it "should have correct links on the layout" do
+      visit root_path
+      click_link 'About'
+      expect(page).to have_title(full_title('About'))
+      click_link 'Help'
+      expect(page).to have_title(full_title('Help'))
+      # Similar tests should be for other links
+    end
   end
 end
 
