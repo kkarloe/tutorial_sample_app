@@ -1,1 +1,2 @@
-# Ruby on Rails Tutorial: sample application
+# Ruby on Rails Tutorial: sample application.
+# Hey
