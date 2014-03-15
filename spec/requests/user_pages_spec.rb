@@ -69,16 +69,14 @@ describe "User pages" do
       before { click_button "Sign in" }
       
       it { should have_title("Sign in") }
-      it { should have_selector('div.alert.alert-error') }  
+      it { should have_error_message("Email/password don't match") }  
     end
     
     describe "with valid information" do
       let(:user) { FactoryGirl.create(:user) }
       
       before do
-        fill_in "Email",  with: user.email.upcase
-        fill_in "Password", with: user.password
-        click_button "Sign in"
+        valid_signin(user)
       end
       
       it { should have_title(user.name) }
