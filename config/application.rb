@@ -25,8 +25,7 @@ module SampleApp
     
     # To solve issue "Precompiling assets fialed" when deploying to heroku
     config.assets.initialize_on_precompile = false
-    #test2
-    
+
     I18n.enforce_available_locales = false
   end
 end
