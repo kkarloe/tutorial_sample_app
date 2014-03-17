@@ -65,9 +65,7 @@ describe "Authentication" do
 
 	  		describe "after redirection to sign in page and signing in" do
 	  			before do
-	  			  fill_in "Email",    with: user.email
-	      		  fill_in "Password", with: user.password
-	      		  click_button 'Sign in'
+	  			  sign_in user
 	  			end
 	  			it "should render the desired protected page" do
 	        		expect(page).to have_title('Edit user')
