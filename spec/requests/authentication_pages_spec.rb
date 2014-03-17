@@ -92,6 +92,9 @@ describe "Authentication" do
       
       it { should have_title("Sign in") }
       it { should have_error_message("Email/password don't match") }  
+      it { should_not have_link("Profile") }
+      it { should_not have_link("Settings") }
+      it { should_not have_link("Sign out") }
     end
     
     describe "with valid information" do
