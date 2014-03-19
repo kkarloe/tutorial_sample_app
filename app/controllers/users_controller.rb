@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :signed_in_user, only: [:index, :edit, :update, :destroy]
   before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: :destroy
+  before_action :admin_user,     only: [:destroy]
   before_action :not_signed_in_user, only: [:new, :create]
 
   def show 
@@ -41,8 +41,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User deleted."
+    @user = User.find(params[:id])
+    # Since destroy action can only be called by admin, current_user will be admin's id
+    # Check whether user which is supposed to be deleted (@user) is an admin (current_user)
+    if current_user?(@user)
+      flash[:error] = "Cannot delete current admin"
+    else
+      @user.destroy
+      flash[:success] = "User deleted."
+    end
     redirect_to users_url
   end
 

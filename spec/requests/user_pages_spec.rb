@@ -113,6 +113,18 @@ describe "User pages" do
 
   end # ends "edit"
 
+  # TODO: Error : bad argument (expcted URI object or URI string)
+  # there was answer in SO regarding same problem that we need to add remember_token to query 
+  # describe "admins-userpages" do
+  #   let(:admin) { FactoryGirl.create(:admin) }
+  #   let(:non_admin) { FactoryGirl.create(:user) }
+
+  #   it "should not be able to delete themself" do
+  #     sign_in admin
+  #     expect { delete :destroy, :id => admin.id }.not_to change(User, :count)
+  #   end
+  # end
+
   describe "index" do
     before do
       sign_in FactoryGirl.create(:user)
