@@ -115,6 +115,7 @@ describe "User pages" do
 
   # TODO: Error : bad argument (expcted URI object or URI string)
   # there was answer in SO regarding same problem that we need to add remember_token to query 
+  # http://stackoverflow.com/questions/10989427/rspec-test-destroy-method-rails-tutorial-3-2-ch-9-ex-10 
   # describe "admins-userpages" do
   #   let(:admin) { FactoryGirl.create(:admin) }
   #   let(:non_admin) { FactoryGirl.create(:user) }
