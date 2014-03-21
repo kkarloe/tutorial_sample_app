@@ -9,6 +9,8 @@ class UsersController < ApplicationController
   end
   
   def index
+    @test = "foo"
+    debugger
     @users = User.paginate(page: params[:page])
   end 
 
@@ -44,6 +46,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     # Since destroy action can only be called by admin, current_user will be admin's id
     # Check whether user which is supposed to be deleted (@user) is an admin (current_user)
+    logger.debug "Destroying user: #{@user.id}"
     if current_user?(@user)
       flash[:error] = "Cannot delete current admin"
     else
