@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   
   def index
     @test = "foo"
-    debugger
+    #debugger
     @users = User.paginate(page: params[:page])
   end 
 
