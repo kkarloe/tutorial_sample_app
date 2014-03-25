@@ -24,11 +24,24 @@ describe "Micropost pages" do
 
     describe "with valid information" do
 
-      before { fill_in 'micropost_content', with: "Lorem ipsum" }
-      it "should create a micropost" do
+      before do 
+        fill_in 'micropost_content', with: "Lorem ipsum"
         expect { click_button "Post" }.to change(Micropost, :count).by(1)
       end
-    end
+      
+      it "after creating first micropost" do
+        expect(page).to have_content("1 micropost")
+      end # end should create micropost
+      
+      describe "after creating second micropost" do
+          before do
+            fill_in 'micropost_content', with: "Dolor sit amet" 
+            click_button "Post"
+          end
+          it { should have_content("2 microposts")}
+      end
+        
+    end # end with valid information
   end # end micropost creation
   
   describe "micropost destruction" do
