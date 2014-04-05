@@ -88,6 +88,13 @@ describe "User pages" do
           end.to change(other_user.followers, :count).by(1)
         end
         
+        it "increments followers counter text" do
+            expect(page).to have_link("0 followers", href: followers_user_path(other_user))
+            click_button "Follow"
+            expect(page).to have_link("1 followers", href: followers_user_path(other_user))
+            expect(page).to have_link("0 following", href: following_user_path(other_user))
+        end
+        
         describe "toggling the button" do
           before { click_button "Follow" }
           it { should have_xpath("//input[@value='Unfollow']") }
@@ -110,6 +117,13 @@ describe "User pages" do
           expect do
             click_button "Unfollow"
           end.to change(other_user.followers, :count).by(-1)
+        end
+        
+        it "decrements followers counter text" do
+          expect(page).to have_link("1 followers", href: followers_user_path(other_user))
+          click_button "Unfollow"
+          expect(page).to have_link("0 followers", href: followers_user_path(other_user))
+          expect(page).to have_link("0 following", href: following_user_path(other_user))
         end
         
         describe "toggling the button" do
