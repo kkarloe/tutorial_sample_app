@@ -1,10 +1,10 @@
 <%-# This replaced _user_info.html.erb -%>
-<%= gravatar_for @user %>
+<%= gravatar_for @user if (@user != nil) %>
 <h1><%= @user.name %></h1>
 
 <span>
-	<% if action_name != "show" %>
+	<% if (!(action_name == "show" && controller_name == "users")) %>
   		<%= link_to 'view my profile', @user %>
   	<% end %>
 </span>
-<span><b>Microposts:</b> <%= @user.microposts.count %></span>
+<span><b><%= pluralize(@user.microposts.count, "micropost") %></b></span>
