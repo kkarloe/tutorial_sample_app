@@ -1,0 +1,10 @@
+<%-# This replaced _user_info.html.erb -%>
+<%= gravatar_for @user %>
+<h1><%= @user.name %></h1>
+
+<span>
+	<% if action_name != "show" %>
+  		<%= link_to 'view my profile', @user %>
+  	<% end %>
+</span>
+<span><b>Microposts:</b> <%= @user.microposts.count %></span>
