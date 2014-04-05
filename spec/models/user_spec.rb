@@ -207,6 +207,77 @@ describe User do
       its(:followers) { should include(@user) }
     end
     
+    describe "relationship association" do
+      before do
+        ## its(:followers) { should include(other_user) } # fail - undefined method its
+        other_user.destroy
+      end
+      ## other_user.destroy # fail - undefined local variable or method other_user (need to access from before/it/specify block)
+      
+      it "deletes associatesd relationship" do
+        expect(@user.followers).not_to include(other_user) 
+      end
+      
+      it "has correct name" do
+        expect(@user.name).to eq("Karol")
+      end
+      
+      its(:followers) { should_not include(other_user) }
+      
+    end
+   
   end # end following
   
+  describe "My learning demos" do
+    describe Array do
+      describe "with 3 items" do
+        before { @arr = [1, 2, 3] }
+    
+        specify { @arr.should_not be_empty }
+        specify { @arr.count.should eq(3) }
+      end
+    end
+    
+    describe "Demo" do
+      describe "array with 3 items" do
+        subject { [1, 2, 3] }
+    
+        it { should_not be_empty }
+        its(:count) { should eq(3) }
+      end
+      
+      describe "demo different constructs" do
+        before { @a = 4 }
+        let(:b) { 5 }
+        
+        # specify (sysnonym for it) for single line
+        specify { @a.should eq(4) } # use of should (not recommended - better expect instead)
+        
+        it do
+          @a = 5
+          expect(@a).to eq(5)
+          # even though we changed value of @a, in next specify/it it will have the old value 
+          # cause before is by default before :each and will be run before every example (it/specify)
+          # and therefore b will be set to 5 before every example
+        end
+        
+        # specify (synonym for it) for multiple lines
+        specify do
+          expect(@a).not_to eq(5) # use of expect (recommended)
+          expect(b).to eq(5)
+          expect(@a).not_to eq(b)
+        end
+        
+        # it for single line
+        it { expect(@a).to eq(4) }
+        
+        # it for multiple lines
+        it do
+          expect(@a).not_to eq(5)
+          expect(b).to eq(5)
+        end
+        
+      end # end demo different constructs
+    end # end demo
+  end # end my demos
 end
