@@ -238,7 +238,7 @@ describe User do
       end
     end
     
-    describe "Demo" do
+    describe "My Demo" do
       describe "array with 3 items" do
         subject { [1, 2, 3] }
     
